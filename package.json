@@ -1,0 +1,22 @@
+{
+  "name": "jogo-multiplayer-teste",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WesleyIsFerreira/Jogo-Multiplayer-Teste.git"
+  },
+  "author": "Wesley Ferreira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WesleyIsFerreira/Jogo-Multiplayer-Teste/issues"
+  },
+  "homepage": "https://github.com/WesleyIsFerreira/Jogo-Multiplayer-Teste#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
