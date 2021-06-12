@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Primeiro Jogo MT</title>
+    <link rel="icon" type="imagem/png" href="icon.png" />
     <style>
         #screen{
             border: 10px solid #CCC;
@@ -14,6 +15,7 @@
             height: 400px;
         }
     </style>
+    <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
 
@@ -31,17 +33,12 @@
 
         const screen = document.getElementById('screen')
         renderScreen(screen, game, requestAnimationFrame)
-
-
         
-        const currentPlayerId = 'player1'
+        const socket = io()
 
-        game.addPlayer({playerId: 'player1', playerX: 0, playerY: 0})
-        game.addPlayer({playerId: 'player2', playerX: 1, playerY: 3})
-        game.addPlayer({playerId: 'player3', playerX: 4, playerY: 4})
-        game.addFruit({fruitId: 'fruit1', fruitX: 6, fruitY: 4})
-        game.addFruit({fruitId: 'fruit2', fruitX: 4, fruitY: 8})
-        
+        socket.on('connect', () = > {
+            const playerId = socket.id
+        })
 
     </script>
 </body>
