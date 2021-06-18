@@ -1,24 +1,35 @@
 import express from 'express'
 import http from 'http'
 import createGame from './public/create-game.js'
-import socketio from 'socket.io'
+//import socketio from 'socket.io'
+import {Server} from 'socket.io'
 
 const app = express()
 const server = http.createServer(app)
-const sockets = socketio(server)
+const sockets = new Server(server);
 
 app.use(express.static('public'))
 
 const game = createGame()
 
-game.addPlayer({playerId: 'player1', playerX: 0, playerY: 0})
-game.addPlayer({playerId: 'player2', playerX: 1, playerY: 3})
-game.addPlayer({playerId: 'player3', playerX: 4, playerY: 4})
-game.addFruit({fruitId: 'fruit1', fruitX: 6, fruitY: 4})
-game.addFruit({fruitId: 'fruit2', fruitX: 4, fruitY: 8})
+game.subscribe((command) => {
+      console.log('Observer - ' + command.type)
+      sockets.emit(command.type, command)
+})
 
 sockets.on('connection', (socket) =>{
   const playerId = socket.id
+  console.log('>Jogador Conectado no server com o ID: ' + playerId)
+
+  game.addPlayer({playerId: playerId})
+
+  socket.emit('setup', game.state)
+
+  socket.on('disconnect', () => {
+    game.removePlayer({playerId: playerId})
+    console.log('Jogador desconectado ID: ' + playerId)
+  })
+
 })
 
 
