@@ -17,6 +17,7 @@ export default function createKeyboardListener(document) {
         if(state.observers.length)
             for (const observerFunction of state.observers){
                 observerFunction(command)
+                console.log(command)
             }
     }
 
