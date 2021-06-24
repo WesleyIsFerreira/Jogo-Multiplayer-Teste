@@ -11,6 +11,7 @@ const sockets = new Server(server);
 app.use(express.static('public'))
 
 const game = createGame()
+game.start()
 
 game.subscribe((command) => {
       console.log('Observer - ' + command.type)
@@ -28,6 +29,13 @@ sockets.on('connection', (socket) =>{
   socket.on('disconnect', () => {
     game.removePlayer({playerId: playerId})
     console.log('Jogador desconectado ID: ' + playerId)
+  })
+
+  socket.on('move-player', (command) => {
+    command.playerId = playerId
+    command.type = 'move-player'
+
+    game.movePlayer(command)
   })
 
 })

@@ -17,7 +17,6 @@ export default function createKeyboardListener(document) {
         if(state.observers.length)
             for (const observerFunction of state.observers){
                 observerFunction(command)
-                console.log(command)
             }
     }
 
@@ -28,6 +27,7 @@ export default function createKeyboardListener(document) {
         const keyPressed = event.key
 
         const command = {
+            type: 'move-player',
             playerId: state.playerId,
             keyPressed
         }
